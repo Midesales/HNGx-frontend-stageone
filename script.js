@@ -1,20 +1,18 @@
- function updateData() {
-       
-        const timestampElement = document.getElementById('timestamp');
-        const dayOfWeekElement = document.getElementById('dayOfWeek');
+const updateCurrentDay = () => {
+    const currentDayElement = document.getElementById('currentDay');
+    const now = new Date();
+    const options = {weekday: 'long'};
+    const formattedTime = now.toLocaleDateString('en-US', options);
+    currentDayElement.textContent = formattedTime
+}
+setInterval(updateCurrentDay, 1000)//update every seconds
+updateCurrentDay(); //update immediately
 
-        
-
-        // Get current UTC time and day of the week
-        const now = new Date();
-        const utcTime = now.toUTCString();
-        const dayOfWeek = now.toLocaleString('en-US', { weekday: 'long' });
-
-        // Update the displayed data
-        timestampElement.textContent = `Last updated: ${utcTime}`;
-        dayOfWeekElement.textContent = `Today is ${dayOfWeek}`;
-    }
-
-    // Call the updateData function initially and set interval for real-time updates
-    updateData();
-    setInterval(updateData, 2000); // Update every 5 seconds
+const updateCurrentTime = () => {
+    const currentTimeElement = document.getElementById('currentTime');
+    const now = new Date();
+    const utcMilliseconds = now.getTime();
+    currentTimeElement.textContent = utcMilliseconds.toString();
+}
+setInterval(updateCurrentTime, 1)//update every milisecond
+updateCurrentTime(); //update immediately
